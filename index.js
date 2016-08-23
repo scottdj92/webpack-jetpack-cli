@@ -2,13 +2,18 @@
 
 'use strict';
 
-const program = require('commander');
+const program = require('commander'),
+    inquirer = require('inquirer'),
+    chalk = require('chalk'),
+    pkg = require('./package.json');
+
+let createConfig = (options) => {
+    console.log('Fueling jetpack...');
+};
 
 program
-    .version('')
-    .command('')
-    .description('')
-    .option('')
-    .option('')
-    .action('');
+    .version(pkg.version)
+    .command('fuel')
+    .description('Fueling jetpack...')
+    .action(createConfig);
 program.parse(process.argv);
