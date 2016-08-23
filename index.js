@@ -10,11 +10,10 @@ const program = require('commander'),
 let createConfig = (options) => {
     console.log('Fueling jetpack...');
     start();
-    //openFile();
 };
 
 let start = () => {
-    fs.open(__dirname + '/export/webpack.config.js', "w+", function(err, data) {
+    fs.open(__dirname + '/webpack.config.js', "w+", function(err, data) {
         if (err) {
             return console.error(err);
         }
@@ -27,12 +26,19 @@ let start = () => {
 };
 
 let writeFile = (data) => {
-    console.log("Building configuration");
-    fs.writeFile(__dirname + '/export/webpack.config.js', data.config, function(err) {
+    console.log("Building configuration...");
+    fs.writeFile(__dirname + '/webpack.config.js', JSON.stringify(data, null, 4), function(err) {
         if (err) {
             return console.error("error writing file", err);
         }
+        console.log("wrote: ", data);
+        //end(data);
     });
+};
+
+let end = (data) => {
+    console.log('Setting down...');
+    fs.close(data);
 };
 
 program
