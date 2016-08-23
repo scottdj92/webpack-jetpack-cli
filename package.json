@@ -1,0 +1,22 @@
+{
+  "name": "webpack-jetpack-cli",
+  "version": "0.0.1",
+  "description": "A CLI app for webpack-jetpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottdj92/webpack-jetpack-cli.git"
+  },
+  "author": "Scott Jones",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scottdj92/webpack-jetpack-cli/issues"
+  },
+  "homepage": "https://github.com/scottdj92/webpack-jetpack-cli#readme",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
+}
