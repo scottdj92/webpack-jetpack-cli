@@ -10,15 +10,17 @@ let start = () => {
 
 let writeFile = (data) => {
     console.log("Building configuration...");
-    fs.writeFile(__dirname + '/webpack.config.js', JSON.stringify(data, null, 4), function(err) {
+    let dirname = __dirname + '/webpack.config.js';
+    let stringify = JSON.stringify(data, null, 4);
+    fs.writeFile(dirname, stringify, function(err) {
         if (err) {
             return console.error("error writing file", err);
         }
-        end(data);
+        end();
     });
 };
 
-let end = (data) => {
+let end = () => {
     console.log('Setting down...');
 };
 

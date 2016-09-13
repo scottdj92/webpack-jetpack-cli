@@ -43,7 +43,6 @@ let handleEntry = (entry) => {
 
 let handleOutput = (output) => {
     baseConfig.output.filename = output;
-    console.log(baseConfig);
     return baseConfig;
 };
 
