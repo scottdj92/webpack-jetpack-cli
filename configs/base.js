@@ -9,8 +9,7 @@ var config = {
 
     ],
     resolve: {
-        modulesDirectories: ['node_modules'],
-        extensions: ['', '.css', '.js', '.jsx', '.scss']
+        modulesDirectories: ['node_modules']
     },
     module: {
         loaders: {

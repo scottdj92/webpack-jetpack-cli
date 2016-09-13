@@ -9,13 +9,6 @@
     "resolve": {
         "modulesDirectories": [
             "node_modules"
-        ],
-        "extensions": [
-            "",
-            ".css",
-            ".js",
-            ".jsx",
-            ".scss"
         ]
     },
     "module": {
