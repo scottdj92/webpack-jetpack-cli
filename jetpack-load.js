@@ -24,7 +24,6 @@ let onComplete = (data) => {
     //handlePlugins();
     config = handleTests(data.tests);
     //config = handleLoaders(data.loaders);
-    console.log(config);
 
 
     //write to file
@@ -32,7 +31,7 @@ let onComplete = (data) => {
 };
 
 let writeFile = (data) => {
-    console.log("Building configuration...", data);
+    console.log("Building configuration...");
     fs.writeFile(__dirname + '/webpack.config.js', JSON.stringify(data, null, 4), function(err) {
         if (err) {
             return console.error("error writing file", err);
@@ -55,26 +54,30 @@ let handleOutput = (output) => {
     return CONFIG;
 };
 
-let handleLoaders = (loaders) => {
+let handleLoaders = (module, test) => {
     //for each loader in the array, it'll add it in the module.loaders in the config.
+    console.log(module, test);
 };
 
 let handleTests = (tests) => {
     //required for webpack to recognize all file extensions
-    let resolve = tests.unshift('');
+    //remove the empty first entry
+    let resolve = tests.unshift();
     CONFIG.resolve.extensions = resolve;
 
     if (tests) {
-        //create tests and loaders
+        //create tests
         for(var i = 0; i < tests.length; i++) {
             let model = {
                 test: null,
                 loader: ''
             };
-            model.test = /\i$/;
+            model.test = new RegExp("\\" + tests[i] + "$");
+
+            //create loaders for specified test
+            handleLoaders(model, tests[i]);
             CONFIG.module.loaders.push(model);
         }
-        //console.log(CONFIG);
     }
     return CONFIG;
 }
