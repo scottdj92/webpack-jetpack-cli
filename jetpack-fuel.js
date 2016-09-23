@@ -1,3 +1,5 @@
+"use strict";
+
 const fs = require('fs'),
     inquirer = require('inquirer'),
     chalk = require('chalk');

@@ -1,6 +1,8 @@
+"use strict";
+
 const inquirer = require('inquirer'),
         questions = require('./questions/jetpack-load'),
-        baseConfig = require('./configs/base'),
+        CONFIG = require('./configs/base'),
         fs = require('fs'),
         chalk = require('chalk');
 
@@ -14,36 +16,43 @@ let start = () => {
 }
 
 let onComplete = (data) => {
-    console.log(data);
+    // console.log('answer data', data);
     //create placeholder var for config obj
-    var config;
+    let config;
     config = handleEntry(data.entry);
     config = handleOutput(data.output);
     //handlePlugins();
     config = handleTests(data.tests);
-    config = handleLoaders(data.loaders);
+    //config = handleLoaders(data.loaders);
+    console.log(config);
+
 
     //write to file
     writeFile(config);
 };
 
 let writeFile = (data) => {
-    console.log("Building configuration...");
+    console.log("Building configuration...", data);
     fs.writeFile(__dirname + '/webpack.config.js', JSON.stringify(data, null, 4), function(err) {
         if (err) {
             return console.error("error writing file", err);
         }
-        end(data);
     });
+    end(data);
+};
+
+let end = (data) => {
+    console.log('We are finished.', data);
 };
 
 let handleEntry = (entry) => {
-    baseConfig.entry.app = entry;
+    CONFIG.entry.app = entry;
+    return CONFIG;
 };
 
 let handleOutput = (output) => {
-    baseConfig.output.filename = output;
-    return baseConfig;
+    CONFIG.output.filename = output;
+    return CONFIG;
 };
 
 let handleLoaders = (loaders) => {
@@ -53,18 +62,21 @@ let handleLoaders = (loaders) => {
 let handleTests = (tests) => {
     //required for webpack to recognize all file extensions
     let resolve = tests.unshift('');
-    baseConfig.resolve.extensions = resolve;
+    CONFIG.resolve.extensions = resolve;
 
-    //create tests and loaders
-    for(var i = 0; i < tests.length; i++) {
-        let model = {
-            test: '',
-            loader: ''
-        };
-        model.test = /\i$/;
-        baseConfig.module.loaders.push(model);
+    if (tests) {
+        //create tests and loaders
+        for(var i = 0; i < tests.length; i++) {
+            let model = {
+                test: null,
+                loader: ''
+            };
+            model.test = /\i$/;
+            CONFIG.module.loaders.push(model);
+        }
+        //console.log(CONFIG);
     }
-    return baseConfig;
+    return CONFIG;
 }
 
 console.log('Loading jetpack...');

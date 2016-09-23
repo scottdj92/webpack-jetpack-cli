@@ -6,6 +6,6 @@ const program = require('commander'),
 
 program
     .version(pkg.version)
-    .command('fuel', 'bootstraps a basic webpack configuration file', {isDefault: true})
-    .command('load', 'same as fuel, but interactive and more verbose')
+    .command('fuel', 'bootstraps a basic webpack configuration file')
+    .command('load', 'same as fuel, but interactive and more verbose', {isDefault: true})
 program.parse(process.argv);

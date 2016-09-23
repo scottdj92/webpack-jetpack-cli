@@ -12,9 +12,7 @@ var config = {
         modulesDirectories: ['node_modules']
     },
     module: {
-        loaders: {
-
-        }
+        loaders: []
     }
 };
 
