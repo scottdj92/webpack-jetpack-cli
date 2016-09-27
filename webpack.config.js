@@ -1,17 +1,28 @@
 {
     "entry": {
-        "app": "./index.js"
+        "app": "index.js"
     },
     "output": {
-        "filename": "bundle.js"
+        "filename": "bundle.js",
+        "publicPath": "/dist"
     },
     "plugins": [],
     "resolve": {
         "modulesDirectories": [
             "node_modules"
-        ]
+        ],
+        "extensions": 2
     },
     "module": {
-        "loaders": []
+        "loaders": [
+            {
+                "test": {},
+                "loader": []
+            },
+            {
+                "test": {},
+                "loader": []
+            }
+        ]
     }
 }

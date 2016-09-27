@@ -4,6 +4,7 @@ var config = {
     },
     output: {
         filename: 'bundle.js',
+        publicPath: '/dist'
     },
     plugins: [
 

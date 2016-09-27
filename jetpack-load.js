@@ -21,10 +21,8 @@ let onComplete = (data) => {
     let config;
     config = handleEntry(data.entry);
     config = handleOutput(data.output);
-    //handlePlugins();
+    //config = handlePlugins();
     config = handleTests(data.tests);
-    //config = handleLoaders(data.loaders);
-
 
     //write to file
     writeFile(config);
@@ -41,7 +39,7 @@ let writeFile = (data) => {
 };
 
 let end = (data) => {
-    console.log('We are finished.', data);
+    console.log('Touching down.', data);
 };
 
 let handleEntry = (entry) => {
@@ -56,21 +54,21 @@ let handleOutput = (output) => {
 
 let handleLoaders = (module, test) => {
     //for each loader in the array, it'll add it in the module.loaders in the config.
-    console.log(module, test);
+    //console.log(module, test);
 };
 
 let handleTests = (tests) => {
     //required for webpack to recognize all file extensions
     //remove the empty first entry
-    let resolve = tests.unshift();
-    CONFIG.resolve.extensions = resolve;
+    tests.unshift();
+    CONFIG.resolve.extensions = tests;
 
     if (tests) {
         //create tests
         for(var i = 0; i < tests.length; i++) {
             let model = {
                 test: null,
-                loader: ''
+                loader: []
             };
             model.test = new RegExp("\\" + tests[i] + "$");
 
