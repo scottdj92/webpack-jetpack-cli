@@ -30,7 +30,7 @@ let onComplete = (data) => {
 
 let writeFile = (data) => {
     console.log("Building configuration...");
-    fs.writeFile(__dirname + '/webpack.config.js', JSON.stringify(data, null, 4), function(err) {
+    fs.writeFile(__dirname + '/webpack.config.js', JSON.stringify(data, undefined, 4), function(err) {
         if (err) {
             return console.error("error writing file", err);
         }
@@ -59,8 +59,6 @@ let handleLoaders = (module, test) => {
 
 let handleTests = (tests) => {
     //required for webpack to recognize all file extensions
-    //remove the empty first entry
-    tests.unshift();
     CONFIG.resolve.extensions = tests;
 
     if (tests) {
@@ -70,10 +68,10 @@ let handleTests = (tests) => {
                 test: null,
                 loader: []
             };
-            model.test = new RegExp("\\" + tests[i] + "$");
+            model.test = new RegExp('\\' + tests[i] + '$').toString();
 
             //create loaders for specified test
-            handleLoaders(model, tests[i]);
+            //handleLoaders(model, tests[i]);
             CONFIG.module.loaders.push(model);
         }
     }
