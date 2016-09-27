@@ -6,9 +6,7 @@ var config = {
         filename: 'bundle.js',
         publicPath: '/dist'
     },
-    plugins: [
-
-    ],
+    plugins: [],
     resolve: {
         modulesDirectories: ['node_modules']
     },

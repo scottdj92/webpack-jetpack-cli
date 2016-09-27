@@ -4,7 +4,8 @@ const inquirer = require('inquirer'),
         questions = require('./questions/jetpack-load'),
         CONFIG = require('./configs/base'),
         fs = require('fs'),
-        chalk = require('chalk');
+        chalk = require('chalk'),
+        testLoaders = require('./loaders/loaders');
 
 let start = () => {
     console.log('Wrenching');
@@ -30,7 +31,7 @@ let onComplete = (data) => {
 
 let writeFile = (data) => {
     console.log("Building configuration...");
-    fs.writeFile(__dirname + '/webpack.config.js', JSON.stringify(data, undefined, 4), function(err) {
+    fs.writeFile(__dirname + '/webpack.config.js', JSON.stringify(data, null, 4), function(err) {
         if (err) {
             return console.error("error writing file", err);
         }
@@ -54,7 +55,8 @@ let handleOutput = (output) => {
 
 let handleLoaders = (module, test) => {
     //for each loader in the array, it'll add it in the module.loaders in the config.
-    //console.log(module, test);
+    console.log(module, test);
+    testLoader(module, test);
 };
 
 let handleTests = (tests) => {
@@ -71,7 +73,7 @@ let handleTests = (tests) => {
             model.test = new RegExp('\\' + tests[i] + '$').toString();
 
             //create loaders for specified test
-            //handleLoaders(model, tests[i]);
+            handleLoaders(model, tests[i]);
             CONFIG.module.loaders.push(model);
         }
     }
