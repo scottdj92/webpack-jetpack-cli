@@ -17,7 +17,7 @@ let start = () => {
 }
 
 let onComplete = (data) => {
-    console.log('answer data', data);
+    // console.log('answer data', data);
     //create placeholder var for config obj
     let config;
     config = handleEntry(data.entry);
@@ -62,9 +62,7 @@ let handlePlugins = (plugins) => {
 
 let handleLoaders = (rule, test) => {
     //for each loader in the array, it'll add it in the loader for the rule in the config.
-    console.log('handleLoaders', rule, test);
     let loadedRule = LoaderTester(rule, test);
-    console.log('loadedRule', loadedRule);
 };
 
 let handleRules = (rules) => {
@@ -78,7 +76,7 @@ let handleRules = (rules) => {
                 test: null,
                 use: null
             };
-            rule.test = new RegExp('\\' + rules[i] + '$');
+            rule.test = new RegExp('\\' + rules[i] + '$').toString();
 
             //create loaders for specified test
             handleLoaders(rule, rules[i]);
