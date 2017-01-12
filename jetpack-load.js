@@ -17,13 +17,13 @@ let start = () => {
 }
 
 let onComplete = (data) => {
-    // console.log('answer data', data);
+    console.log('answer data', data);
     //create placeholder var for config obj
     let config;
     config = handleEntry(data.entry);
     config = handleOutput(data.output);
-    //config = handlePlugins();
-    config = handleTests(data.tests);
+    // config = handlePlugins(data.plugins);
+    config = handleRules(data.tests);
 
     //write to file
     writeFile(config);
@@ -53,32 +53,42 @@ let handleOutput = (output) => {
     return CONFIG;
 };
 
+let handlePlugins = (plugins) => {
+    CONFIG.plugins.push( new HtmlWebpackPlugin({template: 'index.html'}));
+}
+
 let handleLoaders = (module, test) => {
     //for each loader in the array, it'll add it in the module.loaders in the config.
-    console.log(module, test);
+    console.log('handleLoaders', module, test);
     testLoader(module, test);
 };
 
-let handleTests = (tests) => {
+let handleRules = (rules) => {
     //required for webpack to recognize all file extensions
-    CONFIG.resolve.extensions = tests;
+    CONFIG.resolve.extensions = rules;
 
-    if (tests) {
+    if (rules) {
         //create tests
-        for(var i = 0; i < tests.length; i++) {
-            let model = {
+        for(var i = 0; i < rules.length; i++) {
+            let rule = {
                 test: null,
-                loader: []
+                use: null
             };
-            model.test = new RegExp('\\' + tests[i] + '$').toString();
+            rule.test = new RegExp('\\' + rules[i] + '$');
+            console.log('test', rule.test);
 
             //create loaders for specified test
-            handleLoaders(model, tests[i]);
-            CONFIG.module.loaders.push(model);
+            handleLoaders(rule, rules[i]);
+            CONFIG.module.rules.push(rule);
         }
     }
+    console.log('finishing up rules');
     return CONFIG;
 }
+
+let testLoader = (rule, test) => {
+    console.log('testLoader', rule, test);
+};
 
 console.log('Loading jetpack...');
 start();

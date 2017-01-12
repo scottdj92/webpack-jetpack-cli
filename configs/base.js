@@ -3,15 +3,14 @@ var config = {
         app: './index.js'
     },
     output: {
-        filename: 'bundle.js',
-        publicPath: '/dist'
+        filename: 'bundle.js'
     },
     plugins: [],
     resolve: {
         modulesDirectories: ['node_modules']
     },
     module: {
-        loaders: []
+        rules: []
     }
 };
 

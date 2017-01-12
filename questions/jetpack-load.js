@@ -9,26 +9,26 @@ const questions = [
         message: 'Where should webpack output to?',
         default: 'bundle.js'
     },
-    // {
-    //     name: 'plugins',
-    //     message: 'What plugins will you have?',
-    //     type: 'checkbox',
-    //     choices: [
-    //         'ExtractTextPlugin'
-    //     ]
-    // },
+    {
+        name: 'plugins',
+        message: 'What plugins will you have?',
+        type: 'checkbox',
+        choices: [
+            'ExtractTextPlugin',
+            'HtmlWebpackPlugin'
+        ]
+    },
     {
         name: 'loaders',
         message: 'What loaders will you have?',
         type: 'checkbox',
         choices: [
-            'babel',
+            'babel-latest',
             'react-hot',
             'style-loader',
             'css-loader',
             'sass-loader',
-            'file-loader',
-            'json-loader'
+            'file-loader'
         ]
     },
     {
@@ -44,8 +44,7 @@ const questions = [
             '.less',
             '.jpg',
             '.png',
-            '.svg',
-            '.json'
+            '.svg'
         ]
     }
 ];

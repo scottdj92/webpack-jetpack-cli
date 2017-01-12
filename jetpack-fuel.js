@@ -1,8 +1,6 @@
 "use strict";
 
-const fs = require('fs'),
-    inquirer = require('inquirer'),
-    chalk = require('chalk');
+const fs = require('fs');
 
 let start = () => {
     console.log('Ignition.');
