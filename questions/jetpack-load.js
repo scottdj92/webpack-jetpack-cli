@@ -20,19 +20,6 @@ const questions = [
     //     ]
     // },
     {
-        name: 'loaders',
-        message: 'What loaders will you have?',
-        type: 'checkbox',
-        choices: [
-            'babel-latest',
-            'react-hot',
-            'style-loader',
-            'css-loader',
-            'sass-loader',
-            'file-loader'
-        ]
-    },
-    {
         name: 'tests',
         message: 'What files will you be testing for?',
         type: 'checkbox',
