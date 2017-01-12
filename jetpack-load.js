@@ -54,7 +54,10 @@ let handleOutput = (output) => {
 };
 
 let handlePlugins = (plugins) => {
-    CONFIG.plugins.push( new HtmlWebpackPlugin({template: 'index.html'}));
+    //CURRENTLY NO SUPPORT FOR THIS UNTIL A BETTER FILE SYSTEM API IS FIGURED OUT
+    if (plugins) {
+        CONFIG.plugins.push( new HtmlWebpackPlugin({template: 'index.html'}));
+    }
 }
 
 let handleLoaders = (rule, test) => {
