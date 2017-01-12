@@ -2,22 +2,28 @@
 
 //currently we'll need to hard code the most commonly used loaders here
 
-let testLoader = (module, ext) => {
+const testLoader = (rule, ext) => {
     let loaderList = '';
     switch (ext) {
         case '.js':
-            console.log('javascript');
+            loaderList = ['babel-loader'];
+        case '.jsx':
+            loaderList = ['babel-loader'];
             break;
         case '.css':
-            loader = 'style-loader!css';
+            loaderList = ['style-loader', 'css-loader'];
             break;
-        case '.scss':
-            loader = 'css!sass';
+        case '.scss' | '.sass':
+            loaderList = ['css-loader', 'sass-loader'];
             break;
+        case '.less':
+            loaderList = ['css-loader', 'less-loader'];
         default:
-            loader = 'file-loader?name=assets/[name].[ext]';
+            loaderList = 'file-loader?name=assets/[name].[ext]';
             break;
     }
-    module.loader = loaderList;
-    return module;
-}
+    rule.use = loaderList;
+    return rule;
+};
+
+module.exports = testLoader;

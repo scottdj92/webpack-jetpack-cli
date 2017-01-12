@@ -5,7 +5,7 @@ const inquirer = require('inquirer'),
         CONFIG = require('./configs/base'),
         fs = require('fs'),
         chalk = require('chalk'),
-        testLoaders = require('./loaders/loaders');
+        LoaderTester = require('./loaders/loaders');
 
 let start = () => {
     console.log('Wrenching');
@@ -40,7 +40,7 @@ let writeFile = (data) => {
 };
 
 let end = (data) => {
-    console.log('Touching down.', data);
+    console.log('Touching down.');
 };
 
 let handleEntry = (entry) => {
@@ -57,10 +57,11 @@ let handlePlugins = (plugins) => {
     CONFIG.plugins.push( new HtmlWebpackPlugin({template: 'index.html'}));
 }
 
-let handleLoaders = (module, test) => {
-    //for each loader in the array, it'll add it in the module.loaders in the config.
-    console.log('handleLoaders', module, test);
-    testLoader(module, test);
+let handleLoaders = (rule, test) => {
+    //for each loader in the array, it'll add it in the loader for the rule in the config.
+    console.log('handleLoaders', rule, test);
+    let loadedRule = LoaderTester(rule, test);
+    console.log('loadedRule', loadedRule);
 };
 
 let handleRules = (rules) => {
@@ -75,20 +76,14 @@ let handleRules = (rules) => {
                 use: null
             };
             rule.test = new RegExp('\\' + rules[i] + '$');
-            console.log('test', rule.test);
 
             //create loaders for specified test
             handleLoaders(rule, rules[i]);
             CONFIG.module.rules.push(rule);
         }
     }
-    console.log('finishing up rules');
     return CONFIG;
 }
-
-let testLoader = (rule, test) => {
-    console.log('testLoader', rule, test);
-};
 
 console.log('Loading jetpack...');
 start();
