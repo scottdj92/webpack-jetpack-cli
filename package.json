@@ -1,6 +1,6 @@
 {
   "name": "webpack-jetpack-cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A CLI app for webpack-jetpack",
   "main": "index.js",
   "scripts": {
